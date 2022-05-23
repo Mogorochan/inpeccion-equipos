@@ -1,0 +1,102 @@
+<header id="main.header" class="py-2 bg-info bg-opacity-25 text-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <i class="fas fa-user"></i>Editar Vehículo
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<form #vehiculoForm="ngForm" (ngSubmit)="guardar(vehiculoForm)">
+    <flash-messages></flash-messages>
+
+    <section id="actions" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a routerLink="/" class="btn btn-link">
+                        <i class="fas fa-arrow-left"></i> Regresar al inicio
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Editar vehículo</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="placa">Placa: </label>
+                                <input type="text" name="placa" class="form-control" #placa="ngModel"
+                                    [(ngModel)]="vehiculo.placa"
+                                    [ngClass]="{'is-invalid': placa.errors && placa.touched}" required minlength="2">
+                                <div [hidden]="!placa.errors?.['required']" class="invalid-feedback">
+                                    Placa requerida
+                                </div>
+                                <div [hidden]="!placa.errors?.['minlength']" class="invalid-feedback">
+                                    Debe contener al menos 2 caracteres
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipo">Tipo: </label>
+                                <input type="text" name="tipo" class="form-control" #tipo="ngModel"
+                                    [(ngModel)]="vehiculo.tipo" [ngClass]="{'is-invalid': tipo.errors && tipo.touched}"
+                                    required minlength="2">
+                                <div [hidden]="!tipo.errors?.['required']" class="invalid-feedback">
+                                    Tipo requerido
+                                </div>
+                                <div [hidden]="!tipo.errors?.['minlength']" class="invalid-feedback">
+                                    Debe contener al menos 2 caracteres
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="caracteristica1">Característica 1: </label>
+                                <input type="text" name="caracteristica1" class="form-control"
+                                    #caracteristica1="ngModel" [(ngModel)]="vehiculo.caracteristica1"
+                                    [ngClass]="{'is-invalid': caracteristica1.errors && caracteristica1.touched}"
+                                    required minlength="2">
+                                <div [hidden]="!caracteristica1.errors?.['required']" class="invalid-feedback">
+                                    Caracterstica 1 requerida
+                                </div>
+                                <div [hidden]="!caracteristica1.errors?.['minlength']" class="invalid-feedback">
+                                    Debe contener al menos 2 caracteres
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="caracteristica2">Característica 2: </label>
+                                <input type="text" name="caracteristica2" class="form-control"
+                                    #caracteristica2="ngModel" [(ngModel)]="vehiculo.caracteristica2"
+                                    [ngClass]="{'is-invalid': caracteristica2.errors && caracteristica2.touched}"
+                                    required minlength="2">
+                                <div [hidden]="!caracteristica1.errors?.['required']" class="invalid-feedback">
+                                    Característica 2 requerida
+                                </div>
+                                <div [hidden]="!caracteristica2.errors?.['minlength']" class="invalid-feedback">
+                                    Debe contener al menos 2 caracteres
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit">
+                                        <i class="fa-solid fa-floppy-disk" style="color: rgb(33, 206, 163);" ></i>
+                                    </button>
+                                        <a href="#" (click)="eliminar()">
+                                            <i class="fas fa-trash" style="color: rgb(206, 38, 38);"></i>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

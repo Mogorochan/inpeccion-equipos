@@ -1,0 +1,133 @@
+<!-- Botones-->
+<section id="actions" class="py-4mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal"
+                    data-bs-target="#agregarVehiculoModal">
+                    <i class="fas fa-plus"></i>Agregar 
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Listado vehiculos-->
+
+<section id="vehiculos">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Detalles vehículos</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Placa</th>
+                                <th>Tipo</th>
+                                <th>Caracteristica 1</th>
+                                <th>Caracteristica 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let vehiculo of vehiculos; let i= index">
+                                <td>{{i+1}}</td>
+                                <td>{{vehiculo.placa}}</td>
+                                <td>{{vehiculo.tipo}}</td>
+                                <td>{{vehiculo.caracteristica1 }}</td>
+                                <td>{{vehiculo.caracteristica2 }}</td>
+                                <td>
+                                    <a routerLink="vehiculo/editar/{{vehiculo.id}}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="#" (click)="eliminar()">
+                                        <i class="fas fa-trash" style="color: rgb(206, 38, 38);"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+<!-- Vehicuko modal -->
+
+<div class="modal fade" id="agregarVehiculoModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-gray">
+                <!--Estilo del modal-->
+                <h5 class="modal-tittle">Agregar vehículo</h5>
+                <button class="close" data-bs-dismiss="modal" #botonCerrar>
+                    <!--atributo para cerrar el modal-->
+                    <span>&times;</span>
+                    <!--símbolo de X-->
+                </button>
+            </div>
+
+            <flash-messages></flash-messages>
+            <!--mensaje que surge cuando se agrega un elemento-->
+
+            <form #vehiculoForm="ngForm" (ngSubmit)="agregar(vehiculoForm)">
+                <div class="modal-body">
+                    <!--cuerpo del modal-->
+                    <div class="form-group">
+                        <label for="placa">Placa: </label>
+                        <input type="text" name="placa" class="form-control" #placa="ngModel"
+                            [(ngModel)]="vehiculo.placa" [ngClass]="{'is-invalid': placa.errors && placa.touched}"
+                            required minlength="2">
+                        <div [hidden]="!placa.errors?.['required']" class="invalid-feedback">
+                            Placa requerido
+                        </div>
+                        <div [hidden]="!placa.errors?.['minlength']" class="invalid-feedback">
+                            Debe contener al menos 2 caracteres
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo: </label>
+                        <input type="text" name="tipo" class="form-control" #tipo="ngModel" [(ngModel)]="vehiculo.tipo"
+                            [ngClass]="{'is-invalid': tipo.errors && tipo.touched}" required minlength="2">
+                        <div [hidden]="!tipo.errors?.['required']" class="invalid-feedback">
+                            Tipo requerido
+                        </div>
+                        <div [hidden]="!tipo.errors?.['minlength']" class="invalid-feedback">
+                            Debe contener al menos 2 caracteres
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="caracteristica1">Caracteristica 1: </label>
+                        <input type="text" name="caracteristica1" class="form-control" #caracteristica1="ngModel"
+                            [(ngModel)]="vehiculo.caracteristica1"
+                            [ngClass]="{'is-invalid': caracteristica1.errors && caracteristica1.touched}" required
+                            minlength="2">
+                        <div [hidden]="!caracteristica1.errors?.['required']" class="invalid-feedback">
+                            Caracteristica 1 requerida
+                        </div>
+                        <div [hidden]="!caracteristica1.errors?.['minlength']" class="invalid-feedback">
+                            Debe contener al menos 2 caracteres
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="caracteristica2">Caracteristica 2: </label>
+                        <input type="text" name="caracteristica2" class="form-control" #caracteristica2="ngModel"
+                            [(ngModel)]="vehiculo.caracteristica2"
+                            [ngClass]="{'is-invalid': caracteristica2.errors && caracteristica2.touched}" required
+                            minlength="2">
+                        <div [hidden]="!caracteristica1.errors?.['required']" class="invalid-feedback">
+                            Caracteristica 2 requerida
+                        </div>
+                        <div [hidden]="!caracteristica2.errors?.['minlength']" class="invalid-feedback">
+                            Debe contener al menos 2 caracteres
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success bg-shade">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
