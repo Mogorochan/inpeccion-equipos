@@ -56,10 +56,5 @@ export class VehiculosComponent implements OnInit {
   private cerrarModal(){
     this.botonCerrar.nativeElement.click();
   }
-  eliminar(){
-    if(confirm('¿Seguro que desea eliminar el registro?')){
-      this.vehiculosServicio.eliminarVehiculo(this.vehiculo);
-      this.router.navigate(['/']);
-    }
-  }
+
 }
